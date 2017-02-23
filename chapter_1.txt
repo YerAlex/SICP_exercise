@@ -159,4 +159,38 @@ Ex 1.31
 				result
 				(iter (next a) (* result (term a)))))
 		(iter a 1))
-	
+
+Ex 1.32
+	(define (accumulate combiner null-value term a next b)
+		(if (> a b)
+			null-value
+			(combiner (term a) (accumulate combiner null-value term (next a) next b))))
+
+	(define (sum a b)
+		(define (plus a b) (+ a b))
+		(define (next x) (+ 1 x))
+		(define (identity x) x)
+		(accumulate plus 0 identity a next b))
+
+	(define (product a b)
+		(define (times a b) (* a b))
+		(define (next x) (+ 1 x))
+		(define (identity x) x)
+		(accumulate times 1 identity a next b))
+	Iterative version:
+	(define (accumulate combiner null-value term a next b)
+		(define (iter a result)
+			(if (> a b)
+				result
+				(iter (next a) (combiner (term a) result))))
+		(iter a null-value))
+
+Ex 1.33
+	(define (filtered-accumulate combiner null-value term a next b filter)
+		(if (> a b)
+			null-value
+			(if (fiter a)
+                (combiner (term a) (filtered-accumulate combiner null-value term (next a) next b filter))
+                (filtered-accumulate combiner null-value term (next a) next b filter))))
+
+
