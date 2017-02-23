@@ -1,2 +1,2 @@
-Git is a distributed version control system.
-Git is free software.
+A repository to save my answers to the SICP exercises. (To be continued.)
+Hope to benefit all learners of SICP.
