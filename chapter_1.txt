@@ -208,3 +208,12 @@ Ex 1.35
 	(define (golden-ratio x)
 		(fixed-point (lambda (x) (+ 1 (/ 1 x))) x))
 	(golden-ratio 1)
+
+Ex 1.37
+	(define (count-frac_iter n d k)
+		(let ((numer (n k)))
+			(if (= k 1)
+				(/ numer (d k))
+				(let ((denom (+ (d k) (count-frac_iter n d (- k 1)))))
+					(/ numer denom)))))
+	(count-frac_iter (lambda (i) 1.0) (lambda (i) 1.0) 11)
