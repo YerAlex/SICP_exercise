@@ -210,10 +210,37 @@ Ex 1.35
 	(golden-ratio 1)
 
 Ex 1.37
-	(define (count-frac_iter n d k)
-		(let ((numer (n k)))
-			(if (= k 1)
-				(/ numer (d k))
-				(let ((denom (+ (d k) (count-frac_iter n d (- k 1)))))
-					(/ numer denom)))))
-	(count-frac_iter (lambda (i) 1.0) (lambda (i) 1.0) 11)
+	(define (count-frac_recur n d k)
+		(define (recur i)
+			(if (= i k)
+				(/ (n i) (d i))
+				(/ (n i) (+ (d i) (recur (+ i 1))))))
+		(recur 1))
+	(count-frac_recur (lambda (i) 1.0) (lambda (i) 1.0) 11)
+
+Ex 1.38
+	(define (e-count-frac k)
+		(count-frac_recur 	(lambda (i) 1.0 )
+							(lambda (i) (if (= (remainder i 3) 2)
+											(* 2 (/ (+ i 1) 3))
+											1.0))
+							k))
+
+	(e-count-frac 10)
+
+Ex 1.39
+	(define (count-frac_recur n d k)
+		(define (recur i)
+				(if (= i k)
+					(/ (n i) (d i))
+					(/ (n i) (- (d i) (recur (+ i 1))))))
+		(recur 1))
+		
+	(define (tan-cf x k)
+		(count-frac_recur 	(lambda (i) 	(if (= i 1)
+											x
+											(* x x)))
+							(lambda (i) (- (* 2 i) 1))
+							k))
+
+	(tan-cf 0.785398 100)
