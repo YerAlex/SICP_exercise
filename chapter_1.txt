@@ -244,3 +244,33 @@ Ex 1.39
 							k))
 
 	(tan-cf 0.785398 100)
+	
+Ex 1.40
+	(define (cubic a b c)
+		(lambda (x) (+ (* x x x) (* a x x) (* b x) c)))
+		
+Ex 1.41
+	(define (double g)
+		(lambda (x) (g (g x))))
+	(define (inc x)
+		(+ x 1))
+	(((double (double double)) inc) 5)
+	Value: 21
+
+Ex 1.42
+	(define (compose f g)
+		(lambda (x) (f (g x))))
+ 
+Ex 1.43	
+	(define (repeated f n)
+		(lambda (x) (if (= n 1)
+						(f x)
+						(f ((repeated f (- n 1)) x)))))
+						
+Ex 1.44
+	(define dx 0.000001)
+	(define (smooth f)
+		(lambda (x) (/ (+ (f (+ x dx)) (f x) (f (- x dx))) 3)))
+
+Ex 1.45
+	
