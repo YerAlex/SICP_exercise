@@ -4,3 +4,63 @@ Ex 2.1
 			(if 	(< (* (/ n g) (/ d g)) 0)
 					(cons (- 0 (/ n g) (/ d g)))
 					(cons (/ n g) (/ d g)))))
+					
+Ex 2.17
+	(define (last-pair list)
+		(if (null? (cdr list))
+			(car list)
+			(last-pair (cdr list))))
+        
+Ex 2.18
+	(define (reverse list)
+		(define (iter list result)
+				(if (null? list)
+					result
+					(iter (cdr list) (cons (car list) result))))
+		(iter list null))
+		
+Ex 2.19
+	(define (first-denomination x)
+		(car x))
+		
+	(define (except-first-denomination x)
+		(cdr x))
+	
+	(define (no-more? x)
+		(null? x))
+		
+Ex 2.20
+	(define (same-parity x . l)
+		(let ((g (remainder x 2)))
+			(define (recur l)
+				(if (null? l)
+					null
+					(if (= g (remainder (car l) 2))
+						(cons (car l) (recur (cdr l)))
+						(recur (cdr l)))))
+			(cons x (recur l))))
+			
+Ex 2.21
+	(cons (square (car items) (square-list (cdr items))))
+	
+	(map square items)
+	
+Ex 2.23
+	(define (for-each  f list)
+		(if (not (null? list))
+			(begin 
+				(f (car list))
+				(for-each f (cdr list)))))
+				
+Ex 2.25
+	(car (cdr (car (cdr (cdr c)))))
+	(car (car c))
+	(car (cdr (car (cdr (car (cdr (car (cdr (car (cdr (car (cdr c))))))))))))
+	
+Ex 2.26
+	(1 2 3 4 5 6)
+	((1 2 3) 4 5 6)
+	((1 2 3) (4 5 6))
+	
+Ex 2.27
+	
